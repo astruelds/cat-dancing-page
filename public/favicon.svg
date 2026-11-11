@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" role="img" aria-label="고양이">
+  <path d="M150 170 C190 160 195 110 170 95" fill="none" stroke="#f4a259" stroke-width="14" stroke-linecap="round"/>
+  <ellipse cx="100" cy="160" rx="52" ry="48" fill="#f4a259"/>
+  <ellipse cx="100" cy="170" rx="30" ry="30" fill="#fde4c8"/>
+  <ellipse cx="72" cy="204" rx="16" ry="10" fill="#f4a259"/>
+  <ellipse cx="128" cy="204" rx="16" ry="10" fill="#f4a259"/>
+  <path d="M50 60 L58 12 L88 42 Z" fill="#f4a259"/>
+  <path d="M150 60 L142 12 L112 42 Z" fill="#f4a259"/>
+  <path d="M58 52 L62 26 L80 44 Z" fill="#f7b7a3"/>
+  <path d="M142 52 L138 26 L120 44 Z" fill="#f7b7a3"/>
+  <ellipse cx="100" cy="78" rx="56" ry="48" fill="#f4a259"/>
+  <ellipse cx="80" cy="74" rx="7" ry="10" fill="#2d2a32"/>
+  <ellipse cx="120" cy="74" rx="7" ry="10" fill="#2d2a32"/>
+  <path d="M95 90 L105 90 L100 96 Z" fill="#e5737f"/>
+  <path d="M100 96 Q93 104 86 100 M100 96 Q107 104 114 100" fill="none" stroke="#2d2a32" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

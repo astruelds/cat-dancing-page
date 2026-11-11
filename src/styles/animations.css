@@ -1,0 +1,227 @@
+/* ---------- 고양이 색상 ---------- */
+.stage {
+  --fur: #f4a259;
+  --fur-dark: #d9823a;
+  --belly: #fde4c8;
+  --pink: #f7b7a3;
+  --nose: #e5737f;
+  --ink: #2d2a32;
+  --beat: 0.6s;
+}
+
+/* SVG 부위별 회전 기준점을 각 부위의 상자 기준으로 */
+.cat-svg g {
+  transform-box: fill-box;
+}
+
+.cat-head { transform-origin: 50% 90%; }
+.cat-tail { transform-origin: 0% 100%; }
+.cat-arm-left { transform-origin: 100% 100%; }
+.cat-arm-right { transform-origin: 0% 100%; }
+.cat-ear-left { transform-origin: 70% 100%; }
+.cat-ear-right { transform-origin: 30% 100%; }
+.cat-leg { transform-origin: 50% 100%; }
+.cat-eyes { transform-origin: 50% 50%; }
+
+/* ---------- 정지 상태: 현재 자세에서 멈춤 ---------- */
+.is-paused .cat,
+.is-paused .cat-svg g,
+.is-paused .floor-shadow,
+.is-paused .note {
+  animation-play-state: paused;
+}
+
+/* 눈 깜빡임은 쉬는 중에도 계속 */
+.cat-eyes {
+  animation: blink 4s infinite;
+}
+
+.is-paused .cat-eyes {
+  animation-play-state: running;
+}
+
+/* ---------- 부위별 기본 리듬 (모든 춤 공통) ---------- */
+.cat-tail {
+  animation: tail-sway calc(var(--beat) * 2) ease-in-out infinite;
+}
+
+.cat-head {
+  animation: head-tilt calc(var(--beat) * 2) ease-in-out infinite;
+}
+
+.cat-arm-left {
+  animation: arm-wave-left calc(var(--beat) * 2) ease-in-out infinite;
+}
+
+.cat-arm-right {
+  animation: arm-wave-right calc(var(--beat) * 2) ease-in-out infinite;
+}
+
+.cat-ear-left {
+  animation: ear-twitch calc(var(--beat) * 4) ease-in-out infinite;
+}
+
+.cat-ear-right {
+  animation: ear-twitch calc(var(--beat) * 4) ease-in-out infinite calc(var(--beat) * 0.5);
+}
+
+.cat-leg-left {
+  animation: step var(--beat) ease-in-out infinite alternate;
+}
+
+.cat-leg-right {
+  animation: step var(--beat) ease-in-out infinite alternate-reverse;
+}
+
+/* ---------- 춤 동작 (몸 전체) ---------- */
+.move-wiggle .cat {
+  animation: wiggle calc(var(--beat) * 2) ease-in-out infinite;
+}
+
+.move-jump .cat {
+  animation: jump calc(var(--beat) * 2) cubic-bezier(0.3, 0, 0.3, 1) infinite;
+}
+.move-jump .floor-shadow {
+  animation: shadow-jump calc(var(--beat) * 2) cubic-bezier(0.3, 0, 0.3, 1) infinite;
+}
+
+.move-spin .cat {
+  animation: spin calc(var(--beat) * 4) cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+
+.move-bounce .cat {
+  animation: bounce var(--beat) ease-in-out infinite;
+}
+
+.move-party .cat {
+  animation: party calc(var(--beat) * 8) ease-in-out infinite;
+}
+.move-party .floor-shadow {
+  animation: shadow-party calc(var(--beat) * 8) ease-in-out infinite;
+}
+
+/* ---------- 음표 ---------- */
+.notes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.note {
+  position: absolute;
+  bottom: 45%;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  color: var(--accent);
+  opacity: 0;
+  animation: note-float calc(var(--beat) * 5) ease-out infinite;
+}
+
+.note-0 { left: 8%;  animation-delay: 0s; }
+.note-1 { right: 8%; animation-delay: calc(var(--beat) * 1.25); }
+.note-2 { left: 18%; animation-delay: calc(var(--beat) * 2.5); }
+.note-3 { right: 16%; animation-delay: calc(var(--beat) * 3.75); }
+
+.is-paused .notes {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.is-playing .notes {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25%      { transform: translateX(-6%) rotate(-9deg); }
+  75%      { transform: translateX(6%) rotate(9deg); }
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0) scale(1.08, 0.92); }
+  15%      { transform: translateY(0) scale(0.95, 1.06); }
+  50%      { transform: translateY(-28%) scale(1, 1) rotate(-4deg); }
+  85%      { transform: translateY(0) scale(1.1, 0.9); }
+}
+
+@keyframes shadow-jump {
+  0%, 100%, 85% { transform: translateX(-50%) scale(1); opacity: 1; }
+  50%           { transform: translateX(-50%) scale(0.55); opacity: 0.5; }
+}
+
+@keyframes spin {
+  0%   { transform: translateY(0) rotate(0deg); }
+  20%  { transform: translateY(0) scale(1.06, 0.94) rotate(0deg); }
+  60%  { transform: translateY(-10%) rotate(360deg); }
+  80%, 100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1.08, 0.92); }
+  50%      { transform: scale(0.94, 1.08) translateY(-4%); }
+}
+
+@keyframes party {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  12.5%    { transform: translate(-8%, 0) rotate(-12deg) scale(1); }
+  25%      { transform: translate(8%, 0) rotate(12deg) scale(1); }
+  37.5%    { transform: translate(0, -24%) rotate(0deg) scale(0.95, 1.05); }
+  50%      { transform: translate(0, 0) scale(1.12, 0.88); }
+  62.5%    { transform: translate(0, -8%) rotate(180deg) scale(1.05); }
+  75%      { transform: translate(0, 0) rotate(360deg) scale(1); }
+  87.5%    { transform: translate(0, 0) rotate(360deg) scale(1.15); }
+}
+
+@keyframes shadow-party {
+  0%, 25%, 50%, 75%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  37.5%                   { transform: translateX(-50%) scale(0.6); opacity: 0.5; }
+  62.5%                   { transform: translateX(-50%) scale(0.85); opacity: 0.8; }
+}
+
+@keyframes tail-sway {
+  0%, 100% { transform: rotate(-12deg); }
+  50%      { transform: rotate(14deg); }
+}
+
+@keyframes head-tilt {
+  0%, 100% { transform: rotate(-6deg); }
+  50%      { transform: rotate(6deg); }
+}
+
+@keyframes arm-wave-left {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-30deg); }
+}
+
+@keyframes arm-wave-right {
+  0%, 100% { transform: rotate(-10deg); }
+  50%      { transform: rotate(30deg); }
+}
+
+@keyframes ear-twitch {
+  0%, 70%, 100% { transform: rotate(0deg); }
+  80%           { transform: rotate(-10deg); }
+  90%           { transform: rotate(6deg); }
+}
+
+@keyframes step {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14%); }
+}
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95%           { transform: scaleY(0.1); }
+}
+
+@keyframes note-float {
+  0%   { transform: translateY(0) rotate(-10deg); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translateY(-140%) rotate(15deg); opacity: 0; }
+}
+
+/* 움직임 줄이기 설정: 장식용 음표 숨김 */
+@media (prefers-reduced-motion: reduce) {
+  .notes { display: none; }
+}

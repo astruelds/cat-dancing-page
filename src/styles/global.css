@@ -1,0 +1,78 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-top: #fff4e6;
+  --bg-bottom: #ffd6e0;
+  --text: #2d2a32;
+  --muted: #6b6470;
+  --accent: #e5737f;
+  --accent-strong: #c8505d;
+  --surface: rgba(255, 255, 255, 0.75);
+  --border: rgba(45, 42, 50, 0.12);
+  --focus: #3a6ff7;
+  --floor: rgba(45, 42, 50, 0.12);
+
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Segoe UI', sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-top: #1d1b2e;
+    --bg-bottom: #3a2440;
+    --text: #f5eef8;
+    --muted: #b8aec2;
+    --accent: #ff8fa0;
+    --accent-strong: #ffb3c0;
+    --surface: rgba(30, 27, 46, 0.75);
+    --border: rgba(245, 238, 248, 0.16);
+    --focus: #8fb0ff;
+    --floor: rgba(0, 0, 0, 0.35);
+  }
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

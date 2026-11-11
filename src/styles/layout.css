@@ -1,0 +1,272 @@
+.layout {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  gap: 16px;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  font-size: clamp(1.75rem, 6vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+}
+
+.main {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.footer {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ---------- 무대 ---------- */
+.stage {
+  position: relative;
+  width: min(78vw, 340px);
+  aspect-ratio: 1 / 1.1;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 6%;
+}
+
+.cat-button {
+  width: 100%;
+  border-radius: 24px;
+  transition: transform 0.2s ease;
+}
+
+.cat-button:hover {
+  transform: scale(1.03);
+}
+
+.cat-button:active {
+  transform: scale(0.97);
+}
+
+.cat {
+  width: 100%;
+  will-change: transform;
+  transform-origin: 50% 95%;
+}
+
+.cat-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.floor-shadow {
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  width: 55%;
+  height: 7%;
+  transform: translateX(-50%);
+  background: var(--floor);
+  border-radius: 50%;
+  filter: blur(4px);
+  z-index: -1;
+}
+
+.status {
+  min-height: 1.5em;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+/* ---------- 컨트롤 ---------- */
+.controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.play-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.play-button:hover {
+  background: var(--accent-strong);
+}
+
+.play-button:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-color-scheme: dark) {
+  .play-button {
+    color: #2d1a22;
+  }
+}
+
+.group {
+  border: none;
+}
+
+.group legend {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+.chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chip.active {
+    color: #2d1a22;
+  }
+}
+
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  opacity: 0.8;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---------- 반응형 ---------- */
+
+/* 모바일: 키보드 안내는 숨기고 터치 안내 */
+@media (max-width: 599px) {
+  .chip kbd,
+  .hint {
+    display: none;
+  }
+
+  .chip {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .controls {
+    padding: 16px;
+  }
+}
+
+/* 태블릿 */
+@media (min-width: 600px) {
+  .layout {
+    padding: 40px 24px;
+  }
+
+  .stage {
+    width: 360px;
+  }
+}
+
+/* 데스크톱: 고양이와 컨트롤을 좌우 배치 */
+@media (min-width: 960px) {
+  .layout {
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .main {
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    grid-template-rows: auto auto;
+    column-gap: 48px;
+    align-items: center;
+    flex: 0;
+  }
+
+  .stage {
+    width: 420px;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .status {
+    grid-row: 2;
+    grid-column: 1;
+    text-align: center;
+  }
+
+  .controls {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+  }
+}
+
+/* 가로 모드 휴대폰: 세로 공간이 부족하므로 고양이를 줄임 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .stage {
+    width: min(40vh, 240px);
+  }
+}
